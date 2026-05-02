@@ -1,10 +1,12 @@
 import { Hero } from "@/components/hero"
-import { Button } from "@/components/ui/button"
-
+import { Container } from "@/components/primitives/container"
+import { ImageCarousel } from "@/components/ui/image-carousel"
 export default function Page() {
   return (
     <div className="bg-background">
       <Hero />
+
+      <ImageCarousel />
     </div>
   )
 }

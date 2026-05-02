@@ -48,7 +48,7 @@ export const Hero = () => {
           )}
         />
         {/* Soft vignette fade */}
-        <div className="pointer-events-none absolute inset-0 z-0 [background:radial-gradient(circle_at_center,transparent_0%,oklch(0.99_0.002_80)_90%)] dark:[background:radial-gradient(circle_at_center,transparent_0%,oklch(0.12_0_0)_90%)]" />
+        <div className="pointer-events-none absolute inset-0 z-0 [background:radial-gradient(circle_at_center,transparent_0%,#fcf8f1_90%)] dark:[background:radial-gradient(circle_at_center,transparent_0%,oklch(0.12_0_0)_90%)]" />
 
         <div className="relative z-10 flex flex-col items-center justify-center gap-6 text-center">
           {/* --- Social Proof --- */}
