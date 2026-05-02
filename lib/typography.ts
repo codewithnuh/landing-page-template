@@ -10,7 +10,7 @@ export const t = {
 
   // Section Titles (Image 2 style)
   headline:
-    "text-4xl sm:text-6xl font-medium tracking-tight leading-tight text-foreground",
+    "text-3xl sm:text-5xl font-medium tracking-tight leading-tight text-black",
 
   // --- Body & Utility ---
   // Subcopy under hero (Image 1)
