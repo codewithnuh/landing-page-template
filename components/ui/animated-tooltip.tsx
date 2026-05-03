@@ -88,7 +88,7 @@ export const AnimatedTooltip = ({
                   rotate: rotate, // Tilt based on mouse position
                   whiteSpace: "nowrap",
                 }}
-                className="absolute -top-14 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center justify-center rounded-md bg-slate-900 px-2 py-1 text-sm shadow-xl"
+                className="absolute -top-14 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center justify-center rounded-md bg-zinc-900 px-2 py-1 text-sm shadow-xl"
               >
                 {/* Decorative Bottom Gradients (The "Glow" under the text) */}
                 <div className="absolute inset-x-10 -bottom-px z-30 h-px w-[20%] bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />

@@ -52,7 +52,7 @@ export const Hero = () => {
 
         <div className="relative z-10 flex flex-col items-center justify-center gap-6 text-center">
           {/* --- Social Proof --- */}
-          <div className="flex items-center gap-6">
+          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row">
             <div className="flex items-center justify-center">
               <AnimatedTooltip items={people} />
             </div>

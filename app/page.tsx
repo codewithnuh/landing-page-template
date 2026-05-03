@@ -4,6 +4,8 @@ import { ImageCarousel } from "@/components/image-carousel"
 import { t } from "@/lib/typography"
 import { LogosCarousel } from "@/components/logo-ticker"
 import ServiceSection from "@/components/service-section"
+import { HowItWorks } from "@/components/how-it-works"
+import { WorksGallery } from "@/components/work-gallery"
 
 export default function Page() {
   return (
@@ -12,6 +14,8 @@ export default function Page() {
       <ImageCarousel />
       <LogosCarousel />
       <ServiceSection />
+      <HowItWorks />
+      <WorksGallery />
     </div>
   )
 }

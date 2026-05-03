@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 import { Container } from "./primitives/container"
 import { t } from "@/lib/typography"
+
 // --- Types ---
 interface ServiceData {
   title: string
@@ -24,7 +25,6 @@ interface CardProps extends ServiceData {
   targetScale: number
 }
 
-// --- Mock Data ---
 const services: ServiceData[] = [
   {
     title: "Brand Identity",
@@ -49,71 +49,73 @@ const services: ServiceData[] = [
   },
 ]
 
-// --- Individual Card Component ---
 const StickyCard = ({
   i,
   title,
   description,
   imageUrl,
   tags,
-
   progress,
   range,
   targetScale,
 }: CardProps) => {
   const container = useRef(null)
-
-  // Maps the scroll of the entire section to this specific card's scale
   const scale = useTransform(progress, range, [1, targetScale])
 
   return (
     <div
       ref={container}
-      className="sticky top-10 flex h-screen items-center justify-center"
+      /* Changed h-screen to min-h-[70vh] for mobile safety */
+      className="sticky top-0 flex min-h-[80vh] items-center justify-center py-10 md:h-screen md:py-0"
     >
       <motion.div
         style={{
           scale,
-          top: `calc(5vh + ${i * 28}px)`, // Creates the "stacked tabs" look
+          /* Dynamic top offset: smaller gaps on mobile, larger on desktop */
+          top: `calc(2vh + ${i * 12}px)`,
           zIndex: i,
         }}
-        className="relative w-full max-w-5xl origin-top"
+        /* origin-top is critical for the stacking effect */
+        className="relative w-full max-w-5xl origin-top px-2 md:px-0"
       >
-        <Card className="overflow-hidden rounded-[2.5rem] border border-none border-slate-100 bg-white shadow-2xl">
-          <CardContent className="p-4 md:p-10">
-            <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-              <div className="relative aspect-4/3 w-full overflow-hidden rounded-3xl bg-slate-50 md:aspect-square">
+        <Card className="overflow-hidden rounded-[1.5rem] border-none bg-white shadow-xl md:rounded-[2.5rem] md:shadow-2xl">
+          <CardContent className="p-5 md:p-10">
+            <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10">
+              {/* Image Section: Responsive Aspect Ratio */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-50 md:aspect-square md:rounded-3xl">
                 <Image
                   src={imageUrl}
                   alt={title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
 
-              <div className="flex flex-col space-y-6 text-left">
-                <div className="space-y-4">
-                  <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+              {/* Content Section */}
+              <div className="flex flex-col space-y-4 md:space-y-6">
+                <div className="space-y-2 md:space-y-4">
+                  <h2 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-5xl">
                     {title}
                   </h2>
-                  <p className="text-lg leading-relaxed text-slate-600">
+                  <p className="text-sm leading-relaxed text-slate-600 sm:text-base md:text-lg">
                     {description}
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
+                {/* Tags: Smaller on mobile */}
+                <div className="flex flex-wrap gap-2 md:gap-3">
                   {tags.map((tag) => (
                     <Badge
                       key={tag}
                       variant="secondary"
-                      className="flex h-auto w-fit items-center gap-3 rounded-full border-none px-5 py-3 text-slate-700" // Added h-auto and increased gap/padding
+                      className="flex h-auto items-center gap-1.5 rounded-full border-none px-3 py-1.5 text-[10px] text-slate-700 sm:text-xs md:gap-3 md:px-5 md:py-3 md:text-lg"
                     >
                       <CheckCircle2
                         fill="#e64a00"
-                        className="size-5 shrink-0 text-white" // size-7 is 28px. shrink-0 prevents the flexbox from squishing it.
+                        className="size-3 shrink-0 text-white md:size-5"
                       />
-                      <span className="text-lg font-medium">{tag}</span>{" "}
-                      {/* Increased text size to match the big icon */}
+                      <span className="font-medium">{tag}</span>
                     </Badge>
                   ))}
                 </div>
@@ -126,7 +128,6 @@ const StickyCard = ({
   )
 }
 
-// --- Main Section Component ---
 export default function StackedServiceSection() {
   const mainContainer = useRef(null)
 
@@ -136,26 +137,33 @@ export default function StackedServiceSection() {
   })
 
   return (
-    <Container>
-      <h2 className={cn(t.headline, "text-center")}>
-        We help brands show up with{" "}
-        <span className={cn(t.displayItalic)}>clarity</span>,<br />
-        <span className={cn(t.displayItalic)}>confidence</span>, and
-        <span className={cn(t.displayItalic)}> design </span> that actually
-        works.
-      </h2>
-      <main ref={mainContainer} className="relative px-4">
-        {services.map((service, i) => {
-          // targetScale: ensures cards underneath get smaller as new ones stack
-          const targetScale = 1 - (services.length - i) * 0.04
+    <Container className="py-10 md:py-20">
+      <div className="mb-10 md:mb-20">
+        <h2 className={cn(t.headline, "text-center")}>
+          We help brands show up with{" "}
+          <span className={cn(t.displayItalic)}>clarity</span>,
+          <br className="hidden md:block" />
+          <span className={cn(t.displayItalic)}> confidence</span>, and
+          <span className={cn(t.displayItalic)}> design </span> that actually
+          works.
+        </h2>
+      </div>
 
+      <main
+        ref={mainContainer}
+        /* Total scrollable height depends on card count. 
+           Mobile gets a bit more "breathing room" height. */
+        className="relative min-h-[300vh] px-2 md:px-4"
+      >
+        {services.map((service, i) => {
+          const targetScale = 1 - (services.length - i) * 0.04
           return (
             <StickyCard
               key={`card_${i}`}
               i={i}
               {...service}
               progress={scrollYProgress}
-              range={[i * 0.25, 1]} // Trigger timing based on index
+              range={[i * 0.25, 1]}
               targetScale={targetScale}
             />
           )
