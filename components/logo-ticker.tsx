@@ -9,7 +9,7 @@ import { motion } from "motion/react"
 
 import Image from "next/image"
 import { Container } from "./primitives/container"
-import { t } from "@/lib/typography"
+
 import { SectionLabel } from "./primitives/section-label"
 const LogoTicker = () => {
   const logos = [

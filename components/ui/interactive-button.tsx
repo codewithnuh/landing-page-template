@@ -5,7 +5,7 @@ import { motion } from "motion/react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-type buttonVariantsType = typeof buttonVariants
+
 interface InteractiveButtonProps extends React.ComponentProps<typeof Button> {
   text: string
 }

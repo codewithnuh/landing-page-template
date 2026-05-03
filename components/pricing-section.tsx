@@ -5,7 +5,6 @@ import {
   useInView,
   useSpring,
   useTransform,
-  AnimatePresence,
 } from "motion/react"
 import { useRef, useEffect, useState } from "react"
 import { Check, ArrowRight, Mail } from "lucide-react"
@@ -13,7 +12,8 @@ import { Container } from "@/components/primitives/container"
 import { Section } from "@/components/primitives/section"
 import { SectionLabel } from "@/components/primitives/section-label"
 import { cn } from "@/lib/utils"
-import { t } from "@/lib/typography"
+import { Button } from "./ui/button"
+
 
 // ─── MOTION VARIANTS ────────────────────────────────────────────────────────
 
@@ -23,7 +23,7 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
@@ -37,7 +37,7 @@ const featureVariant = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
@@ -115,7 +115,7 @@ function AnimatedPrice({ value, dark }: { value: number; dark: boolean }) {
 function PricingToggle({ dark }: { dark: boolean }) {
   const [on, setOn] = useState(false)
   return (
-    <button
+    <Button
       onClick={() => setOn((p) => !p)}
       aria-pressed={on}
       className={cn(
@@ -135,7 +135,7 @@ function PricingToggle({ dark }: { dark: boolean }) {
           on ? "ml-[1.15rem] bg-white" : "ml-[0.15rem] bg-white"
         )}
       />
-    </button>
+    </Button>
   )
 }
 
@@ -195,14 +195,14 @@ function PricingCard({
           scale: 1,
           transition: {
             duration: 0.7,
-            ease: [0.22, 1, 0.36, 1],
+            ease: [0.22, 1, 0.36, 1] as const,
             delay: index * 0.12,
           },
         },
       }}
       whileHover={{
         y: -6,
-        transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+        transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const },
       }}
       className={cn(
         "relative flex flex-col overflow-hidden rounded-2xl border p-7",
@@ -354,7 +354,7 @@ function PricingFooter() {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+      transition={{ duration: 0.6, ease: "easeOut" as const, delay: 0.3 }}
       className="mt-6 flex items-center justify-between gap-4 rounded-2xl border border-gray-200/80 bg-white px-6 py-4 shadow-[0_2px_12px_rgba(0,0,0,0.04)]"
     >
       <div className="flex items-center gap-3">
@@ -420,14 +420,14 @@ export const PricingSection = () => {
             </motion.div>
             <motion.h2
               variants={fadeUp}
-              className={cn(t.headline, "font-medium")}
+              className="text-3xl sm:text-5xl font-medium tracking-tight leading-tight text-foreground"
             >
               Transparent pricing,{" "}
-              <span className={t.displayItalic}>no hidden fees.</span>
+              <span className="font-serif italic font-normal tracking-normal text-foreground">no hidden fees.</span>
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              className={cn(t.body, "mx-auto max-w-sm text-muted-foreground")}
+              className="text-lg sm:text-xl text-muted-foreground/90 leading-relaxed font-normal mx-auto max-w-sm"
             >
               Pause or cancel anytime. No contracts, no surprises — just great
               design, fast.

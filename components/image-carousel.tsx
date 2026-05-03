@@ -3,7 +3,7 @@
 import Image from "next/image"
 import AutoScroll from "embla-carousel-auto-scroll"
 import { useEffect, useMemo, useRef } from "react"
-import { cn } from "@/lib/utils"
+
 
 import {
   Carousel,

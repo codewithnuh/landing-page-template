@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Inter, Playfair_Display } from "next/font/google"
+import { Geist, Playfair_Display } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"

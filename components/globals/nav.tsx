@@ -1,8 +1,7 @@
-import { Hamburger, Menu } from "lucide-react"
+import { Menu } from "lucide-react"
 import { Container } from "../primitives/container"
 import { Section } from "../primitives/section"
 import Link from "next/link"
-import { Button } from "../ui/button"
 import { InteractiveButton } from "../ui/interactive-button"
 
 export const NavBar = () => {
